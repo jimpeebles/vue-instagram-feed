@@ -11,12 +11,19 @@
 <script>
 export default {
   props: {
+    // Instagram API Access Token
+    access_token: {
+      type: String,
+      required: true
+    },
+
     // Number of posts to return
     numPosts: {
       type: String,
       required: false,
       default: "10"
     },
+
     // Only display images with 1x1 aspect ratio
     squareOnly: {
       type: Boolean,
@@ -58,12 +65,7 @@ export default {
   computed: {
     // Returns Instagram API request url including access token from ENV
     endpoint() {
-      return (
-        this.base_url +
-        this.count +
-        "&access_token=" +
-        process.env.IG_ACCESS_TOKEN
-      );
+      return this.base_url + this.count + "&access_token=" + this.access_token;
     }
   }
 };
