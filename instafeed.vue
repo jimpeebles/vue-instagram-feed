@@ -6,7 +6,7 @@
       :key="post.id"
       @click="goToPost(post.link)"
     >
-      <img class="thumbnail-image" :src="post.images[this.resolution].url" />
+      <img class="thumbnail-image" :src="post.images[resolution].url" />
     </div>
   </div>
 </template>
