@@ -1,7 +1,12 @@
 <template>
-  <div class="posts">
-    <div class="thumb-box" v-for="post in posts" :key="post.id" @click="goToPost(post.link)">
-      <img class="thumbnail-image" :src="post.images.low_resolution.url">
+  <div class="posts" :style="{ '--cols': columns }">
+    <div
+      class="thumb-box"
+      v-for="post in posts"
+      :key="post.id"
+      @click="goToPost(post.link)"
+    >
+      <img class="thumbnail-image" :src="post.images[this.resolution].url" />
     </div>
   </div>
 </template>
@@ -27,6 +32,20 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+
+    // Choose resolution - 'low_resolution' (320x320), 'standard_resolution' (640x640), 'thumbnail' (150x150)
+    resolution: {
+      type: String,
+      required: false,
+      default: "low_resolution"
+    },
+
+    //Choose number of columns for grid
+    columns: {
+      type: String,
+      required: false,
+      default: "3"
     }
   },
   data() {
@@ -47,7 +66,8 @@ export default {
     getSquarePosts(postData) {
       postData.forEach(post => {
         if (
-          post.images.low_resolution.height === post.images.low_resolution.width
+          post.images[this.resolution].height ===
+          post.images[this.resolution].width
         ) {
           this.posts.push(post);
         }
@@ -71,8 +91,10 @@ export default {
 
 <style lang="scss" scoped>
 .posts {
+  --cols: 3;
+
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(var(--cols), 1fr);
   width: 100%;
   grid-gap: 10px;
   > img {
