@@ -1,9 +1,7 @@
 <template>
-  <div class="wrapper">
-    <div class="posts">
-      <div class="thumb-box" v-for="post in posts" :key="post.id" @click="goToPost(post.link)">
-        <img class="thumbnail-image" :src="post.images.low_resolution.url">
-      </div>
+  <div class="posts">
+    <div class="thumb-box" v-for="post in posts" :key="post.id" @click="goToPost(post.link)">
+      <img class="thumbnail-image" :src="post.images.low_resolution.url">
     </div>
   </div>
 </template>
